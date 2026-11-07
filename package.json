@@ -1,0 +1,26 @@
+{
+  "name": "devagent",
+  "version": "0.2.0",
+  "description": "Autonomous AI software development agent for existing repositories",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20.10"
+  },
+  "bin": {
+    "devagent": "src/cli.js"
+  },
+  "scripts": {
+    "start": "node src/cli.js serve",
+    "lint": "node scripts/check-syntax.js",
+    "test": "node --test --test-concurrency=1 \"tests/unit/*.test.js\"",
+    "test:e2e": "node --test --test-concurrency=1 \"tests/e2e/*.test.js\"",
+    "test:all": "npm run lint && npm test && npm run test:e2e && npm run test:browser",
+    "check-config": "node src/cli.js check-config",
+    "test:browser": "node --test --test-concurrency=1 --test-timeout=240000 \"tests/browser/*.test.js\""
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^153.0.0",
+    "puppeteer-core": "^25.15.0"
+  }
+}

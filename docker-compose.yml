@@ -1,0 +1,12 @@
+services:
+  devagent:
+    build: .
+    env_file: .env
+    ports: ["127.0.0.1:4317:4317"]
+    volumes:
+      - ./data:/data
+      - ${PROJECTS_DIR:-./projects}:/projects   # mount ONLY the repos the agent may modify
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]

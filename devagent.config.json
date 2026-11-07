@@ -1,0 +1,15 @@
+{
+  "allowedProjectDirs": ["F:\\NewFolder"],
+  "protectedBranches": ["main", "master", "production"],
+  "branchPrefix": "agent/",
+  "limits": { "maxRepairs": 5, "maxTaskMs": 1800000, "maxCommandMs": 300000 },
+  "providers": {
+    "main": { "type": "openai-compatible", "baseUrl": "https://openrouter.ai/api/v1", "model": "nvidia/nemotron-3.5-transcribe", "apiKeyEnv": "AGENT_LLM_API_KEY", "pricing": { "inPerMTok": 0, "outPerMTok": 0 } },
+    "local": { "type": "openai-compatible", "baseUrl": "http://localhost:11434/v1", "model": "your-local-model", "apiKeyEnv": null }
+  },
+  "models": { "planning": "main", "implementation": "main", "debugging": "main" },
+  "budget": { "maxUsdPerTask": 5, "maxTokensPerTask": 2000000 },
+  "commands": { "test": null, "build": null },
+  "sandbox": { "mode": "none", "image": "node:22-bookworm", "network": "bridge", "memory": "2g", "cpus": "2" },
+  "deploy": { "previewCommand": null, "healthPath": "/", "envPassthrough": ["VERCEL_TOKEN"], "extraExecutables": ["vercel"], "productionEnabled": false }
+}
